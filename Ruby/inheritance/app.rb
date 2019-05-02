@@ -11,7 +11,7 @@ puts low_rider
 civic = Car.new("Honda", "Civic")
 puts civic
 
-civic.refuel(50)
+civic.refuel(25)
 low_rider.refuel(15)
 
 civic.fuel_level
