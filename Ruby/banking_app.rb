@@ -22,6 +22,7 @@ history_list = []
 # Ask for customer to select option
 loop do puts "What would you like to do? (options: balance or deposit or withdraw or exit or history)"
         option = gets.strip
+        system "clear"
     if (option == "balance")                        # Balance Option
         puts "Your balance is $#{balance}"
         history_list << "Current Balance: $#{balance}"
