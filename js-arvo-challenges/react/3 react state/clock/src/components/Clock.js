@@ -34,6 +34,7 @@ const Clock = props => {
 				</div>
 			</div>
 			<div>
+				{/* // Create error message */}
 				{errorMessage && (
 					<p className="error">
 						Oops! Cannot display season: {errorMessage} (try checking location settings)

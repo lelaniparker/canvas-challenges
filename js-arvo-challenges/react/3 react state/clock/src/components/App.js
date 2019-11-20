@@ -1,48 +1,41 @@
-import React, { Component } from "react"
+import React, { Component } from "react"	// Add Component
 import Clock from "./Clock"
 
-class App extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
+class App extends Component {		// Class Constructor: class App extends Component
+	constructor(props) {			// Props
+		super(props)				// Super props
+		this.state = {				// Initiate state with this.state (create state)
 			latitude: null,
 			date: new Date(),
-			errorMessage: ""
+			errorMessage: ""	// set errorMessage as empty string inside constructor
 		}
 		// Get current position data and set state values
 		window.navigator.geolocation.getCurrentPosition(
-			position => {
+			position => {			// pass props using this.setState (changes state)
 				this.setState({
 					latitude: position.coords.latitude,
 					date: new Date()
 				})
 			},
-			error => this.setState({ errorMessage: error.message })
+			error => this.setState({ errorMessage: error.message })// pass errorMessage as a prop using this.setState
 		)
 	}
-
 	render() {
-		const { date, errorMessage } = this.state
-		return (
-			<div>
-				<Clock date={date} season={this.getSeason()} errorMessage={errorMessage} />
-			</div>
-		)
+		return <Clock date={this.state.date} season={this.getSeason()} errorMessage={this.state.errorMessage} /> // render onto DOM using this.state.KEYNAME (Never alter state in render method) -> Refer to Clock.js for Error Message
+	}
+
+	tick() {
+		this.setState({ date: new Date() })
 	}
 
 	componentDidMount() {
 		// Reset date every second
 		this.timerId = setInterval(() => this.tick(), 1000)
 	}
+
 	componentWillUnmount() {
 		// Clear the interval set in componentDidMount
 		clearInterval(this.timerId)
-	}
-
-	// helper functions
-
-	tick() {
-		this.setState({ date: new Date() })
 	}
 
 	isSouthernHemisphere(latitude) {
